@@ -9,7 +9,7 @@ x-common-keys: &common-keys
     environment:
       PUID: 1000
       PGID: 1000
-      TZ: Europe/London
+      TZ: America/Los_Angeles
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -27,7 +27,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/radarr:/config
-      - /data:/data
+      - /mnt/plexpassport/plexdata:/data
 
 ###############################################
 # SONARR - TV Shows
@@ -42,7 +42,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sonarr:/config
-      - /data:/data
+      - /mnt/plexpassport/plexdata:/data
 
 ###############################################
 # LIDARR - Music
@@ -57,7 +57,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/lidarr:/config
-      - /data:/data
+      - /mnt/plexpassport/plexdata:/data
 
 ###############################################
 # BAZARR - Subtitles
@@ -72,7 +72,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/bazarr:/config
-      - /data/media:/data/media
+      - /mnt/plexpassport/plexdata/Media:/data/media
 
 ###############################################
 # PROWLARR - Indexer Manager
@@ -106,20 +106,22 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/qbittorrent:/config
-      - /data:/data
+      - /mnt/plexpassport/plexdata:/data
 
 ###############################################
-# JELLYFIN - Media Server
+# Plex - Media Server
 ###############################################
 
-  jellyfin:
+  plex:
     <<: *common-keys
-    container_name: jellyfin
-    image: ghcr.io/hotio/jellyfin:latest
+    container_name: plex
+    image: ghcr.io/hotio/plex:release-603d13b
+    environment:
+        PLEX_CLAIM: claim-nLsuUsTshPhRGzp2uAF9
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/jellyfin:/config
-      - /data/media:/data/media:ro #read-only
+      - /docker/appdata/plex:/config
+      - /plexdatadata/Media:/data/media:ro #read-only
     ports:
       - 8096:8096
 
