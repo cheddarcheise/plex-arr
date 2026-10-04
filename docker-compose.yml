@@ -115,9 +115,10 @@ services:
   plex:
     <<: *common-keys
     container_name: plex
-    image: ghcr.io/hotio/plex:latest
+    image: lscr.io/linuxserver/plex:latest
     environment:
-        PLEX_CLAIM: claim-H3sE9PjUKAGEm4oqR1HT
+      - VERSION=docker
+      - PLEX_CLAIM= #claim here
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/plex:/config
