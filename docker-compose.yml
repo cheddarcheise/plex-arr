@@ -122,7 +122,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/plex:/config
-      - /plexdatadata/Media:/data/media:ro #read-only
+      - /mnt/plexpassport/plexdata/Media:/data/media:ro #read-only
     ports:
       - 32400:32400
 
