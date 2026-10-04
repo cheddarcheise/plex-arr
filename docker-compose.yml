@@ -115,15 +115,15 @@ services:
   plex:
     <<: *common-keys
     container_name: plex
-    image: ghcr.io/hotio/plex:release-603d13b
+    image: ghcr.io/hotio/plex:latest
     environment:
-        PLEX_CLAIM: claim-nLsuUsTshPhRGzp2uAF9
+        PLEX_CLAIM: claim-H3sE9PjUKAGEm4oqR1HT
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/plex:/config
       - /plexdatadata/Media:/data/media:ro #read-only
     ports:
-      - 8096:8096
+      - 32400:32400
 
 ###############################################
 # ARR Stack Dedicated Network
